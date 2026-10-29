@@ -1,0 +1,107 @@
+# Experiment Configurations for HCX-Patent
+# Each experiment defines a complete, reproducible setup
+
+experiments:
+  # Experiment 1: Classical TF-IDF + Logistic Regression Baseline
+  tfidf_baseline:
+    name: "TF-IDF + Logistic Regression Baseline"
+    type: "baseline"
+    description: "Multi-label classification using TF-IDF features and OneVsRest Logistic Regression"
+    model:
+      type: "tfidf_logreg"
+      params:
+        max_features: 50000
+        ngram_range: [1, 2]
+        sublinear_tf: true
+        C: 1.0
+        max_iter: 1000
+        solver: "saga"
+    dataset:
+      sample_size: 10000  # Start with dev sample
+      target_level: "subclass"
+      min_samples_per_class: 10
+    split:
+      strategy: "random"
+      train_ratio: 0.7
+      val_ratio: 0.1
+      calibration_ratio: 0.1
+      test_ratio: 0.1
+      stratified: true
+    evaluation:
+      metrics: ["accuracy", "macro_f1", "micro_f1", "macro_precision", "macro_recall", "hamming_loss"]
+      per_class: true
+      confusion_matrix: false  # Too many classes for subclass level
+    random_seed: 42
+
+  # Experiment 2: Transformer Baseline
+  transformer_baseline:
+    name: "BERT Transformer Baseline"
+    type: "transformer"
+    description: "Fine-tuned BERT for multi-label patent classification"
+    model:
+      type: "transformer"
+      params:
+        model_name: "bert-base-uncased"
+        max_length: 512
+        learning_rate: 2.0e-5
+        num_epochs: 3
+        batch_size: 16
+        warmup_steps: 100
+    dataset:
+      sample_size: 5000  # Smaller for CPU training
+      target_level: "subclass"
+      min_samples_per_class: 10
+    split:
+      strategy: "random"
+      train_ratio: 0.7
+      val_ratio: 0.1
+      calibration_ratio: 0.1
+      test_ratio: 0.1
+    random_seed: 42
+
+  # Experiment 3: Hierarchy-Aware Classification
+  hierarchy_aware:
+    name: "Hierarchy-Aware Classification"
+    type: "hierarchy"
+    description: "Classification with hierarchy-consistent loss and constraint enforcement"
+    model:
+      type: "hierarchy_tfidf"
+      params:
+        max_features: 50000
+        hierarchy_penalty: 0.1
+        enforce_constraints: true
+    dataset:
+      sample_size: 10000
+      target_level: "subclass"
+    split:
+      strategy: "random"
+    random_seed: 42
+
+  # Experiment 5: Conformal Prediction
+  conformal_prediction:
+    name: "Conformal Prediction Analysis"
+    type: "conformal"
+    description: "Split conformal prediction with coverage guarantees"
+    model:
+      type: "tfidf_logreg"  # Uses trained baseline model
+    conformal:
+      target_coverage: 0.9
+      method: "split_conformal"
+    dataset:
+      sample_size: 10000
+    random_seed: 42
+
+  # Experiment 6: Temporal Drift
+  temporal_drift:
+    name: "Temporal Drift Analysis"
+    type: "temporal"
+    description: "Train on pre-2012 patents, test on post-2012 patents"
+    model:
+      type: "tfidf_logreg"
+    dataset:
+      sample_size: 10000
+    split:
+      strategy: "temporal"
+      temporal_cutoff_year: 2012
+    random_seed: 42
+

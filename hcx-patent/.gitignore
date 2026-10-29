@@ -1,0 +1,68 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Data - do not commit large datasets
+DATA/
+*.parquet
+*.parquet.*
+data/
+data/raw/
+data/processed/
+data/splits/
+
+# Artifacts - generated files
+artifacts/checkpoints/
+artifacts/predictions/
+artifacts/metrics/
+artifacts/figures/
+artifacts/reports/
+*.joblib
+*.zip
+
+# MLflow
+mlruns/
+mlflow.db
+
+# SQLite
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+
+# Environment
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+frontend/node_modules/
+frontend/dist/
+
+# Logs
+*.log
+
+# Jupyter
+.ipynb_checkpoints/
+

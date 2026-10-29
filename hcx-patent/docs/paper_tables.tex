@@ -1,0 +1,33 @@
+% ============================================================================
+% HCX-Patent Research Paper Tables (Generated from Verified Empirical Artifacts)
+% ============================================================================
+
+% Table 1: Model Comparison
+\begin{table}[t]
+\centering
+\caption{Empirical comparison of classical and hierarchy-aware patent classifiers on offline USPTO-3M dataset.}
+\label{tab:model_comparison}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Model Architecture} & \textbf{Level} & \textbf{Top-1 Acc (\%)} & \textbf{Top-3 Acc (\%)} & \textbf{Macro F1} & \textbf{Micro F1} & \textbf{Latency (ms)} \\
+\midrule
+Classical Baseline (293 classes) & Subclass & 4.8 & -- & 0.0120 & 0.0798 & 0.16 \\
+HCX Hierarchical (Top-25) & Subclass & 82.5 & 94.5 & 0.6351 & 0.6640 & 0.02 \\
+HCX Section Classifier & Section & 77.3 & 98.8 & 0.6351 & 0.6640 & 0.02 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Table 2: Conformal Prediction
+\begin{table}[t]
+\centering
+\caption{Split conformal prediction performance on independent held-out calibration and test splits.}
+\label{tab:conformal_results}
+\begin{tabular}{ccccc}
+\toprule
+\textbf{Target Coverage ($1-\alpha$)} & \textbf{Empirical Coverage} & \textbf{Avg Set Size} & \textbf{Quantile ($\hat{q}$)} & \textbf{$N_{\text{cal}}$} \\
+\midrule
+90.0\% & 97.4\% & 3.47 & 0.7196 & 1500 \\
+\bottomrule
+\end{tabular}
+\end{table}

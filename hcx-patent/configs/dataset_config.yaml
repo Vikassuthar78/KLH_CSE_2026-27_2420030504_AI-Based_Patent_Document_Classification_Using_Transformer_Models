@@ -1,0 +1,68 @@
+# Dataset Configuration for HCX-Patent
+# This file maps actual dataset columns to canonical fields
+
+dataset:
+  name: "USPTO-3M"
+  version: "1.0"
+  description: "USPTO patent dataset with ~3.2M records"
+  format: "parquet"
+  root_path: "D:\\ALT-PROJECT\\DATA"
+  
+  # File pattern for multi-file datasets
+  file_pattern: "train-*.parquet"
+
+# Column mapping: actual_column -> canonical_field
+column_mapping:
+  patent_id: "id"
+  text: "text"
+  cpc_codes: "cpc_ids"
+  date: "date"
+  # These fields are NOT available in this dataset
+  # title: null
+  # abstract: null
+  # claims: null
+  # description: null
+  # ipc_codes: null
+  # family_id: null
+
+# Label configuration
+labels:
+  # CPC codes in this dataset are at subclass level (e.g., A01H, G06F)
+  # They are stored as comma-separated strings
+  separator: ","
+  # Level to use for classification: section, class, or subclass
+  target_level: "subclass"
+  # Minimum number of samples per class to include
+  min_samples_per_class: 10
+  # Maximum number of classes (use top-N by frequency)
+  max_classes: null
+
+# Text preprocessing
+text:
+  # Maximum text length in characters (before tokenization)
+  max_char_length: 10000
+  # Lowercase
+  lowercase: false
+  # Remove special characters
+  remove_special_chars: false
+
+# Split configuration
+splits:
+  strategy: "random"  # random or temporal
+  train_ratio: 0.7
+  val_ratio: 0.1
+  calibration_ratio: 0.1
+  test_ratio: 0.1
+  # For temporal splits
+  temporal_cutoff_year: 2012
+  # Stratified by label
+  stratified: true
+
+# Development sample
+dev_sample:
+  enabled: true
+  size: 10000
+  # Stratified sampling
+  stratified: true
+  random_seed: 42
+

@@ -1,0 +1,25 @@
+[project]
+name = "hcx-patent"
+version = "0.1.0"
+description = "HCX-Patent: Hierarchical Patent Classification with Explainability and Uncertainty Quantification"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "HCX-Patent Team"}
+]
+
+[project.scripts]
+hcx-patent = "app.main:run"
+
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

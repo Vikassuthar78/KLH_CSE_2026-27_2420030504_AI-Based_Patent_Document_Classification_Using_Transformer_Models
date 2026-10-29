@@ -1,0 +1,73 @@
+# Datasets - do not commit raw or processed datasets
+DATA/
+DATA/*
+*.parquet
+*.parquet.*
+data/
+**/data/raw/
+**/data/processed/
+**/data/splits/
+
+# Python & Environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+venv/
+.venv/
+env/
+
+# Artifacts & Model Checkpoints
+artifacts/checkpoints/
+artifacts/predictions/
+artifacts/metrics/
+artifacts/figures/
+artifacts/reports/
+**/artifacts/
+*.joblib
+*.pt
+*.pth
+*.bin
+*.onnx
+
+# SQLite & MLflow
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+mlruns/
+mlflow.db
+
+# Archives & Temporary binaries
+*.zip
+*.tar
+*.tar.gz
+*.7z
+
+# Media & Videos (exceeds GitHub 100MB limit)
+*.mp4
+*.mkv
+*.avi
+*.mov
+docs/*.mp4
+
+# Frontend build & Node dependencies
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+.vite/
+
+# Environment variables & Logs
+.env
+*.env
+*.log
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.ipynb_checkpoints/
+
